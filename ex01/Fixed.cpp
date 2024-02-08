@@ -6,11 +6,12 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 16:35:21 by jmigoya-          #+#    #+#             */
-/*   Updated: 2024/02/08 18:49:17 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/02/08 19:10:15 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Fixed.hpp"
+#include <math.h>
 
 Fixed::Fixed()
 {
@@ -34,7 +35,8 @@ Fixed::Fixed(const float new_value)
 {
 	std::cout << "Float constructor called" << std::endl;
 
-	_value = static_cast<int>(new_value * (1 << _fractionalBits));
+	float scaledValue = (new_value * (1 << _fractionalBits));
+	_value = static_cast<int>(roundf(scaledValue));
 
 	return;
 }
