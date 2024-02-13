@@ -1,6 +1,6 @@
 OBJS = main.cpp Fixed.cpp
 
-CC = g++
+CC = c++
 
 COMPILER_FLAGS = -Werror -Wextra -Wall -std=c++98 -g
 
