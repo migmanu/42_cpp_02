@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 16:35:21 by jmigoya-          #+#    #+#             */
-/*   Updated: 2024/02/08 19:11:58 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/02/13 20:04:21 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 Fixed::Fixed()
 {
-	std::cout << "Default constructor called" << std::endl;
-
 	_value = 0;
 
 	return;
@@ -23,8 +21,6 @@ Fixed::Fixed()
 
 Fixed::Fixed(const int new_value)
 {
-	std::cout << "Int constructor called" << std::endl;
-
 	_value = new_value << _fractionalBits;
 
 	return;
@@ -32,8 +28,6 @@ Fixed::Fixed(const int new_value)
 
 Fixed::Fixed(const float new_value)
 {
-	std::cout << "Float constructor called" << std::endl;
-
 	float scaledValue = (new_value * (1 << _fractionalBits));
 	_value = static_cast<int>(roundf(scaledValue));
 
@@ -42,38 +36,26 @@ Fixed::Fixed(const float new_value)
 
 Fixed::Fixed(const Fixed &copy)
 {
-	std::cout << "Copy constructor called" << std::endl;
-
 	_value = copy.getRawBits();
 
 	return;
 }
 
-Fixed &Fixed::operator=(const Fixed &copy)
-{
-	std::cout << "Copy assignment operator called" << std::endl;
-
-	_value = copy.getRawBits();
-	return *this;
-}
-
 Fixed::~Fixed()
 {
-	std::cout << "Destructor called" << std::endl;
+	return;
 }
 
 int Fixed::getRawBits(void) const
 {
-	std::cout << "getRawBits member function called" << std::endl;
-
 	return _value;
 }
 
 void Fixed::setRawBits(int const raw)
 {
-	std::cout << "setRawBits member function called" << std::endl;
-
 	_value = raw;
+
+	return;
 }
 
 float Fixed::toFloat(void) const
@@ -84,6 +66,138 @@ float Fixed::toFloat(void) const
 int Fixed::toInt(void) const
 {
 	return _value >> _fractionalBits;
+}
+
+// STATIC MEMBERS
+
+Fixed &Fixed::min(Fixed &f1, Fixed &f2)
+{
+	return (f1 <= f2 ? f1 : f2);
+}
+
+const Fixed &Fixed::min(const Fixed &f1, const Fixed &f2)
+{
+	return (f1 <= f2 ? f1 : f2);
+}
+
+Fixed &Fixed::max(Fixed &f1, Fixed &f2)
+{
+	return (f1 >= f2 ? f1 : f2);
+}
+
+const Fixed &Fixed::max(const Fixed &f1, const Fixed &f2)
+{
+	return (f1 >= f2 ? f1 : f2);
+}
+
+// OVERLOADED OPERATORS
+
+Fixed &Fixed::operator=(const Fixed &copy)
+{
+	if (this == &copy)
+		return *this;
+
+	_value = copy._value;
+
+	return *this;
+}
+
+bool Fixed::operator==(const Fixed &rhs) const
+{
+	return (*this)._value == rhs._value;
+}
+
+bool Fixed::operator!=(const Fixed &rhs) const
+{
+	return !(*this ==rhs);
+}
+
+bool Fixed::operator<(const Fixed &rhs) const
+{
+	return _value < rhs._value;
+}
+bool Fixed::operator<=(const Fixed &rhs) const
+{
+	return *this < rhs || *this == rhs;
+}
+
+bool Fixed::operator>(const Fixed &rhs) const
+{
+	return !(*this <= rhs);
+}
+
+bool Fixed::operator>=(const Fixed &rhs) const
+{
+	return !(*this < rhs);
+}
+
+Fixed Fixed::operator+(const Fixed &rhs) const
+{
+	Fixed result((*this).toFloat() + rhs.toFloat());
+	
+	return result;
+}
+
+Fixed Fixed::operator-(const Fixed &rhs) const
+{
+	Fixed result((*this).toFloat() - rhs.toFloat());
+
+	return result;
+}
+
+Fixed Fixed::operator*(const Fixed &rhs) const
+{
+	Fixed result((*this).toFloat() * rhs.toFloat());
+
+	return result;
+}
+
+Fixed Fixed::operator/(const Fixed &rhs) const
+{
+	if (rhs._value == 0)
+	{
+		std::cout << "Cannot divide by zero!" << std::endl;
+		return *this;
+	}
+	Fixed result((*this).toFloat() / rhs.toFloat());
+
+	return result;
+}
+
+// pre-increment
+Fixed &Fixed::operator++()
+{
+	(*this)._value += 1;
+
+	return *this;
+}
+
+// post-increment
+Fixed Fixed::operator++(int i)
+{
+	i = 0;
+	Fixed tmp(*this);
+	operator++();
+
+	return tmp;
+}
+
+// pre-decrement
+Fixed &Fixed::operator--()
+{
+	(*this)._value -= 1;
+
+	return *this;
+}
+
+// post-decrement
+Fixed Fixed::operator--(int i)
+{
+	i = 0;
+	Fixed tmp(*this);
+	operator--();
+
+	return tmp;
 }
 
 std::ostream &operator<<(std::ostream &os, const Fixed &fix)
