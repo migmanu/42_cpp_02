@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 14:12:57 by jmigoya-          #+#    #+#             */
-/*   Updated: 2024/02/14 17:00:27 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/02/14 20:07:13 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ class Point
 
 	// Operator overloads
 	Point &operator=(const Point &copy);
+	bool operator==(const Point &rhs) const;
+	bool operator!=(const Point &rhs) const;
 
 	// Member functions
 	Fixed getX(void) const;

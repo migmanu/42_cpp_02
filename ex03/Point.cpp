@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 14:12:13 by jmigoya-          #+#    #+#             */
-/*   Updated: 2024/02/14 17:01:11 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/02/14 20:07:52 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,16 @@ Point &Point::operator=(const Point &copy)
 	const_cast<Fixed&>(this->_x) = copy._x;
     const_cast<Fixed&>(this->_y) = copy._y;
 	return *this;
+}
+
+bool Point::operator==(const Point &rhs) const
+{
+	return ((*this)._x == rhs._x && (*this)._y == rhs._y);
+}
+
+bool Point::operator!=(const Point &rhs) const
+{
+	return (!(this->operator==(rhs)));
 }
 
 Fixed Point::getX(void) const
