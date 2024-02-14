@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 16:35:21 by jmigoya-          #+#    #+#             */
-/*   Updated: 2024/02/13 20:04:21 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/02/14 11:21:43 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ bool Fixed::operator==(const Fixed &rhs) const
 
 bool Fixed::operator!=(const Fixed &rhs) const
 {
-	return !(*this ==rhs);
+	return !(*this == rhs);
 }
 
 bool Fixed::operator<(const Fixed &rhs) const
@@ -134,7 +134,7 @@ bool Fixed::operator>=(const Fixed &rhs) const
 Fixed Fixed::operator+(const Fixed &rhs) const
 {
 	Fixed result((*this).toFloat() + rhs.toFloat());
-	
+
 	return result;
 }
 
@@ -175,7 +175,7 @@ Fixed &Fixed::operator++()
 // post-increment
 Fixed Fixed::operator++(int i)
 {
-	i = 0;
+	(void)i; // Avoid unused parameter warning
 	Fixed tmp(*this);
 	operator++();
 
@@ -193,7 +193,7 @@ Fixed &Fixed::operator--()
 // post-decrement
 Fixed Fixed::operator--(int i)
 {
-	i = 0;
+	(void)i; // Avoid unused parameter warning
 	Fixed tmp(*this);
 	operator--();
 
