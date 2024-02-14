@@ -1,4 +1,4 @@
-OBJS = main.cpp Fixed.cpp
+OBJS = main.cpp Fixed.cpp Point.cpp bsp.cpp
 
 CC = c++
 

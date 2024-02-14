@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 16:30:37 by jmigoya-          #+#    #+#             */
-/*   Updated: 2024/02/13 20:03:04 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/02/14 16:58:58 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,13 @@
 
 class Fixed
 {
-  private:
-	int _value;
-	static const int _fractionalBits = 8;
-
   public:
 	// Constructors-Destructors
-	Fixed();
+	Fixed(void);
 	Fixed(const int value);
 	Fixed(const float value);
-	Fixed(const Fixed &copy);
-	~Fixed();
+	Fixed(const Fixed &copy); // Copy constructor
+	~Fixed(void);
 
 	// Member functions
 	int getRawBits(void) const;
@@ -45,7 +41,7 @@ class Fixed
 
 	// Overloaded operators
 	Fixed &operator=(const Fixed &copy);
-	bool operator==(const Fixed& rhs) const;
+	bool operator==(const Fixed &rhs) const;
 	bool operator!=(const Fixed &rhs) const;
 	bool operator>(const Fixed &rhs) const;
 	bool operator>=(const Fixed &rhs) const;
@@ -59,6 +55,11 @@ class Fixed
 	Fixed operator++(int i); // post-increment
 	Fixed &operator--(); // pre-decrement
 	Fixed operator--(int i); // post-decrement
+
+  private:
+	int _value;
+	static const int _fractionalBits = 8;
+
 };
 
 std::ostream	&operator<<(std::ostream &os, const Fixed &fix);

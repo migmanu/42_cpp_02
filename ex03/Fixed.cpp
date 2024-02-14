@@ -6,13 +6,13 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 16:35:21 by jmigoya-          #+#    #+#             */
-/*   Updated: 2024/02/14 11:41:25 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/02/14 15:07:59 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Fixed.hpp"
 
-Fixed::Fixed()
+Fixed::Fixed(void)
 {
 	_value = 0;
 
@@ -41,7 +41,7 @@ Fixed::Fixed(const Fixed &copy)
 	return;
 }
 
-Fixed::~Fixed()
+Fixed::~Fixed(void)
 {
 	return;
 }
